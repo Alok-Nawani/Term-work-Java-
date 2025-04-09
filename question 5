@@ -1,0 +1,52 @@
+// Write a program to validate an IPv4 Address.
+IPv4 addresses are canonically represented in dot-decimal notation, which consists of four decimal numbers, each ranging from 0 to 255, separated by dots, e.g., 172.16.254.1
+
+Source code :-
+
+import java.util.Scanner;
+
+public class IPAddress {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter an IPv4 address: ");
+        String ipAddress = scanner.nextLine();
+        
+        if (isValidIPv4(ipAddress)) {
+            System.out.println(ipAddress + " is valid");
+        } else {
+            System.out.println(ipAddress + " is valid");
+        }
+        scanner.close();
+    }
+    
+    public static boolean isValidIPv4(String ip) {
+        if (ip == null || ip.isEmpty()) {
+            return false;
+        }
+        
+        String[] parts = ip.split("\\.");
+        if (parts.length != 4) {
+            return false;
+        }
+        
+        for (String part : parts) {
+            if (part.length() == 0 || part.length() > 3) {
+                return false;
+            }
+            if (part.length() > 1 && part.startsWith("0")) {
+                return false;
+            }
+            for (char c : part.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    return false;
+                }
+            }
+            int value = Integer.parseInt(part);
+            if (value < 0 || value > 255) {
+                return false;
+            }
+        }
+        
+        return true;
+    }    
+}
