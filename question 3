@@ -1,0 +1,44 @@
+// Java program for Sorting a String
+
+Source code:-
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class StringSorting {
+    // Method to sort string without using inbuilt functions
+    public static String sortStringManually(String str) {
+        char[] charArray = str.toCharArray();
+        int n = charArray.length;
+        
+        for (int i = 0; i < n-1; i++) {
+            for (int j = 0; j < n-i-1; j++) {
+                if (charArray[j] > charArray[j+1]) {
+                    char temp = charArray[j];
+                    charArray[j] = charArray[j+1];
+                    charArray[j+1] = temp;
+                }
+            }
+        }
+        return new String(charArray);
+    }
+
+    // Method to sort string using inbuilt function
+    public static String sortStringUsingInbuilt(String str) {
+        char[] charArray = str.toCharArray();
+        Arrays.sort(charArray);
+        return new String(charArray);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string to sort: ");
+        String input = scanner.nextLine();
+        
+        System.out.println("Sorted string (without inbuilt function): " +  sortStringManually(input));
+        
+        System.out.println("Sorted string (using inbuilt function): " + sortStringUsingInbuilt(input));
+        
+        scanner.close();
+    }
+}
