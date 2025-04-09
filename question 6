@@ -1,0 +1,47 @@
+// Print all permutations of a string in Java and permutations need to be distinct.
+
+Source code:-
+
+import java.util.*;
+
+public class Permutations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String str = scanner.nextLine();
+        
+        int n = str.length();
+        int size = 1;
+        for (int i = 1; i <= n; i++) {
+            size *= i;
+        }
+        
+        String[] permutations = new String[size];
+        int[] count = {0}; 
+        
+        generatePermutations("", str, permutations, count);
+        
+        System.out.println("All permutations:");
+        for (String perm : permutations) {
+            System.out.print(perm + " ");
+        }
+        scanner.close();
+        }
+        
+        private static void generatePermutations(String prefix, String remaining, String[] permutations, int[] count) {
+        int n = remaining.length();
+        if (n == 0) {
+            permutations[count[0]] = prefix;
+            count[0]++;
+        } else {
+            for (int i = 0; i < n; i++) {
+            generatePermutations(
+                prefix + remaining.charAt(i),
+                remaining.substring(0, i) + remaining.substring(i + 1, n),
+                permutations,
+                count
+            );
+            }
+        }
+        }
+    }
