@@ -1,0 +1,55 @@
+//Write a program to insert a string into another string (Without using any predefined method) at any given index.
+
+Source code :-
+
+import java.util.Scanner;
+
+public class StringInsertion {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter the main string: ");
+        String mainStr = scanner.nextLine();
+        
+        System.out.print("Enter the string to insert: ");
+        String strToInsert = scanner.nextLine();
+        
+        System.out.print("Enter the index position: ");
+        int index = scanner.nextInt();
+        
+        char[] mainArray = mainStr.toCharArray();
+        char[] insertArray = strToInsert.toCharArray();
+        
+        char[] result = new char[mainArray.length + insertArray.length];
+        
+        for (int i = 0; i < index; i++) {
+            result[i] = mainArray[i];
+        }
+        
+        for (int i = 0; i < insertArray.length; i++) {
+            result[index + i] = insertArray[i];
+        }
+        
+        for (int i = index; i < mainArray.length; i++) {
+            result[i + insertArray.length] = mainArray[i];
+        }
+        
+        String finalString = new String(result);
+        System.out.println("\nOriginal String: " + mainStr);
+        System.out.println("String to Insert: " + strToInsert);
+        System.out.println("Index: " + index);
+        System.out.println("Result: " + finalString);
+
+        //using predefined function:
+
+        //using StringBuilder:
+        StringBuilder sb = new StringBuilder(mainStr);
+        sb.insert(index, strToInsert);
+        System.out.println("Using StringBuilder: " + sb.toString());
+        //using StringBuffer:
+        StringBuffer sbf = new StringBuffer(mainStr);
+        sbf.insert(index, strToInsert);
+        System.out.println("Using StringBuffer: " + sbf.toString());
+        scanner.close();
+    }
+}
