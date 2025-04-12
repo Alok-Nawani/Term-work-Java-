@@ -2,3 +2,23 @@
 
 Source code :-
 
+import java.util.*;
+import java.util.regex.*;
+ class FindCity {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a sentence:");
+        String sentence = scanner.nextLine();
+        
+        Pattern pattern = Pattern.compile("city");
+        
+        Matcher matcher = pattern.matcher(sentence);
+        
+        int count = 0;
+        while (matcher.find()) {
+            count++;
+        }
+        
+        System.out.println("Total occurrences of 'city': " + count);
+    }
+}
