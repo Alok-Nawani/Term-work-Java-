@@ -2,3 +2,60 @@
 
 Source code:-
 
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class TrainPlatform {
+
+    // Function to find the minimum number of platforms
+    public static int findMinPlatforms(int[] arrival, int[] departure) {
+        Arrays.sort(arrival);
+        Arrays.sort(departure);
+
+        int n = arrival.length;
+        int platformsNeeded = 1;
+        int maxPlatforms = 1;
+
+        int i = 1, j = 0;
+        while (i < n && j < n) {
+            if (arrival[i] <= departure[j]) {
+                platformsNeeded++;
+                i++;
+            } else {
+                platformsNeeded--;
+                j++;
+            }
+            maxPlatforms = Math.max(maxPlatforms, platformsNeeded);
+        }
+
+        return maxPlatforms;
+    }
+
+    // Main method to accept input from user
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of trains: ");
+        int n = sc.nextInt();
+
+        int[] arrival = new int[n];
+        int[] departure = new int[n];
+
+        System.out.println("Enter arrival times in 24-hour format (e.g., 900, 1230):");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Arrival time for train " + (i + 1) + ": ");
+            arrival[i] = sc.nextInt();
+        }
+
+        System.out.println("Enter departure times in 24-hour format:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Departure time for train " + (i + 1) + ": ");
+            departure[i] = sc.nextInt();
+        }
+
+        int result = findMinPlatforms(arrival, departure);
+        System.out.println("Minimum number of platforms required: " + result);
+
+        sc.close();
+    }
+}
