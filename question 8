@@ -2,3 +2,50 @@
 
 Source code:-
 
+import java.util.Scanner;
+
+public class EmailValidator {
+
+    public static boolean isValidEmail(String email) {
+        // Check if email is null or too short
+        if (email == null || email.length() < 5) {
+            return false;
+        }
+
+        int atPos = email.indexOf('@');
+        int dotPos = email.lastIndexOf('.');
+
+        // Must contain one '@' and at least one '.'
+        if (atPos < 1 || dotPos < atPos + 2 || dotPos >= email.length() - 1) {
+            return false;
+        }
+
+        // Check if there is more than one '@'
+        if (email.indexOf('@', atPos + 1) != -1) {
+            return false;
+        }
+
+        // Check for invalid characters (optional basic check)
+        for (char ch : email.toCharArray()) {
+            if (!Character.isLetterOrDigit(ch) && ch != '@' && ch != '.' && ch != '_' && ch != '-') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter email address to validate: ");
+        String email = sc.nextLine();
+
+        if (isValidEmail(email)) {
+            System.out.println("Valid Email Address.");
+        } else {
+            System.out.println("Invalid Email Address.");
+        }
+
+        sc.close();
+    }
+}
